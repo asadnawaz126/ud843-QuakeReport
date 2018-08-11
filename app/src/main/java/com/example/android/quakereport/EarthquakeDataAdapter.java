@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EarthquakeDataAdapter extends ArrayAdapter {
 
@@ -26,13 +29,33 @@ public class EarthquakeDataAdapter extends ArrayAdapter {
 		EarthquakeData currentData = (EarthquakeData) getItem(position);
 
 		TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitudeView);
-		magnitudeTextView.setText(currentData.getMag());
+		DecimalFormat magnitudeFormat = new DecimalFormat("0.0");
+		String magnitude = magnitudeFormat.format(currentData.getMag());
+		magnitudeTextView.setText(magnitude);
 
-		TextView locationTextView = (TextView) listItemView.findViewById(R.id.locationView);
-		locationTextView.setText(currentData.getLoc());
+		String location = currentData.getLoc();
+		String offsetLoc;
+		if(location.contains("of"))
+			offsetLoc = location.substring(0,location.indexOf("of")+2);
+		else
+			offsetLoc = "Near the";
 
+		String primaryLoc = location.substring(location.indexOf("of")+2,location.length());
+
+		TextView offsetTextView = (TextView) listItemView.findViewById(R.id.offsetView);
+		offsetTextView.setText(offsetLoc);
+
+
+		TextView primaryLocTextView = (TextView) listItemView.findViewById(R.id.primaryLocView);
+		primaryLocTextView.setText(primaryLoc);
+
+
+		Date dateObject = new Date(currentData.getTime());
+
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy h:ma");
+		String date = dateFormatter.format(dateObject);
 		TextView timestampTextView = (TextView) listItemView.findViewById(R.id.timestampView);
-		timestampTextView.setText(currentData.getTime());
+		timestampTextView.setText(date);
 
 
 	return listItemView;}

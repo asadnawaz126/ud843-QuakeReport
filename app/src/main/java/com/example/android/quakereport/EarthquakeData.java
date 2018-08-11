@@ -2,19 +2,19 @@ package com.example.android.quakereport;
 
 public class EarthquakeData {
 
-	private String mag;
+	private double mag;
 	private String loc;
-	private String time;
+	private long time;
 
-	public EarthquakeData(String magnituude, String location, String timestamp ){
+	public EarthquakeData(double magnituude, String location, long timestamp ){
 			mag = magnituude;
 			loc = location;
 			time = timestamp;
 	}
 
-	public String getMag(){return mag;}
+	public double getMag(){return mag;}
 
 	public String getLoc(){return loc;}
 
-	public String getTime(){return time;}
+	public long getTime(){return time;}
 }

@@ -16,8 +16,18 @@
         android:layout_weight="1"/>
 
     <TextView
-        android:id="@+id/locationView"
+        android:id="@+id/offsetView"
         android:text="placeHolder"
+        android:gravity="left"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/primaryLocView"
+        android:text="placeHolder"
+        android:gravity="left"
         android:textAppearance="?android:textAppearanceMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,6 +39,7 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:gravity="right"/>
 
 </LinearLayout>
