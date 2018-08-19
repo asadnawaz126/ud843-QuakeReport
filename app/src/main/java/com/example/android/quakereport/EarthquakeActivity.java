@@ -15,13 +15,19 @@
  */
 package com.example.android.quakereport;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class EarthquakeActivity extends AppCompatActivity {
+
+
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
@@ -31,7 +37,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Create a fake list of earthquake locations.
-        ArrayList<EarthquakeData> earthquakes = QueryUtils.extractEarthquakes();
+        final ArrayList<EarthquakeData> earthquakes = QueryUtils.extractEarthquakes();
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
 
@@ -41,5 +47,27 @@ public class EarthquakeActivity extends AppCompatActivity {
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         earthquakeListView.setAdapter(adapter);
+
+        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+				EarthquakeData currentEarthquake = earthquakes.get(position);
+
+				String url = currentEarthquake.getURL();
+				Intent browserIntent = new Intent();
+				browserIntent.setAction(Intent.ACTION_VIEW);
+				browserIntent.setData(Uri.parse(url));
+
+				String title = getResources().getString(R.string.chooser_title);
+
+				Intent chooser = Intent.createChooser(browserIntent, title);
+
+				if (browserIntent.resolveActivity(getPackageManager()) != null) {
+					startActivity(chooser);
+				}
+
+			}
+		});
     }
 }
