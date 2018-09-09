@@ -7,10 +7,11 @@ public class EarthquakeData {
 	private long time;
 	private String url;
 
-	public EarthquakeData(double magnitude, String location, long timestamp ){
+	public EarthquakeData(double magnitude, String location, long timestamp, String URL ){
 			mag = magnitude;
 			loc = location;
 			time = timestamp;
+			url = URL;
 	}
 
 	public double getMag(){return mag;}
